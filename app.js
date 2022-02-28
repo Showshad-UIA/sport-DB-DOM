@@ -1,6 +1,8 @@
 const allPlayers = () => {
-	document.getElementById;
+	document.getElementById("player-container").innerHTML = "";
+	// input field
 	const searchBox = document.getElementById("search-box").value;
+
 	const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${searchBox}`;
 	fetch(url)
 		.then((res) => res.json())
@@ -10,6 +12,8 @@ const allPlayers = () => {
 const showPleayerDetails = (players) => {
 	for (const player of players) {
 		const parent = document.getElementById("player-container");
+
+		// inside parent div create a child div where dinamically insert data
 
 		const div = document.createElement("div");
 		div.innerHTML = `	<div class="card border p-5">
@@ -24,10 +28,11 @@ const showPleayerDetails = (players) => {
     </div>
 
 </div>`;
+		// push to show the data inside html
 		parent.appendChild(div);
 	}
 };
-
+// data call by ID to see the players details
 const details = (id) => {
 	const url = `https://www.thesportsdb.com/api/v1/json/2/lookupplayer.php?id=${id}`;
 	fetch(url)
@@ -36,6 +41,7 @@ const details = (id) => {
 };
 
 const setDetails = (info) => {
+	// using condition for showing the male/female
 	if (info.strGender == "Male") {
 		document.getElementById("male").style.display = "block";
 		document.getElementById("female").style.display = "none";
@@ -43,6 +49,7 @@ const setDetails = (info) => {
 		document.getElementById("male").style.display = "none";
 		document.getElementById("female").style.display = "block";
 	}
+	// show the details of the player
 	document.getElementById("deatails-container").innerHTML = `
                     <div>            
                     <img  class="w-25" src=" ${info.strThumb}" alt="">
